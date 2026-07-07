@@ -32,7 +32,12 @@
     <tbody id="resultBody"></tbody>
   </table>
 
-  <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script>
+    window.addEventListener("error", function (e) {
+      document.getElementById("msg").textContent = "読み込みエラー: " + e.message;
+    });
+  </script>
   <script>
     // ==============================
     // ここにデプロイしたGAS WebアプリのURL(.../exec)を貼り付ける
