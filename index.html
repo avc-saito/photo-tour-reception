@@ -114,6 +114,7 @@
 
     function onScanSuccess(decodedText) {
       document.getElementById("keyword").value = decodedText;
+      stopCamera();
       doSearch();
     }
 
@@ -132,6 +133,17 @@
         document.getElementById("msg").textContent = "カメラ起動しました。QRコードを映してください。";
       }).catch(function (err) {
         document.getElementById("msg").textContent = "カメラ起動失敗: " + err;
+        document.getElementById("startCameraBtn").disabled = false;
+      });
+    }
+
+    function stopCamera() {
+      if (!qrScanner) return;
+
+      qrScanner.stop().then(function () {
+        qrScanner.clear();
+        document.getElementById("startCameraBtn").disabled = false;
+      }).catch(function () {
         document.getElementById("startCameraBtn").disabled = false;
       });
     }
